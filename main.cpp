@@ -128,6 +128,7 @@ void admuser::printallLevel(){
 }
 
 void admuser::printcard(){
+    cout<<endl<<"\t\tAccount details "<<endl;
     printd();
     cout<<"Accout Type : "<<"Admin user"<<endl<<"Level : ";
     printlevel();
@@ -146,6 +147,74 @@ void admuser::printlevel(){
 
 }
 
+//Class for registered user:
+class reguser : public userC
+{   private:
+    string lib_id;
+    void genarateid();
+    
+    public:
+        reguser();
+        ~reguser();
+        reguser(string name, string nic, string adr);
+        reguser(reguser &arg);
+        void createacc();
+        void printcard();
+
+    protected:
+};
+
+reguser::reguser(){
+    lib_id = "";
+}
+
+reguser::~reguser(){
+    //destructor
+}
+
+reguser::reguser(string name, string nic, string adr):userC(name, nic, adr){
+    genarateid();
+}
+
+reguser::reguser(reguser &arg):userC(arg){
+    lib_id = arg.lib_id;
+}
+
+void reguser::createacc(){
+    string name;
+    string nic;
+    string addr;
+    cout<<"\tWelcom to Library system"<<"Please enter your details to sing in to the system as an Registered user : ";
+    cout<<endl<<"Name : ";
+    cin.ignore();
+    getline(cin, name);
+
+    cout<<"NIC : ";
+    getline(cin, nic);
+
+    cout<<"Address : ";
+    getline(cin, addr);
+
+    modify(name,nic,addr);
+    genarateid();
+}
+
+void reguser::printcard(){
+
+    cout<<endl<<"\t\tAccount details "<<endl;
+    printd();
+    cout<<"Accout Type : "<<"Regustered user";
+    
+    cout<<endl<<"User ID : "<<lib_id<<endl;
+}
+
+void reguser::genarateid(){
+    lib_id = "RU" + nic;
+}
+
+
+
+
 
 //start of the main function
 
@@ -154,6 +223,9 @@ int main(){
     admuser u;
     u.createAcc();
     u.printcard();
+    reguser ru;
+    ru.createacc();
+    ru.printcard();
 
     return 0;
 }
