@@ -178,7 +178,7 @@ reguser::reguser(string name, string nic, string adr):userC(name, nic, adr){
 
 reguser::reguser(reguser &arg):userC(arg){
     lib_id = arg.lib_id;
-}
+} 
 
 void reguser::createacc(){
     string name;
@@ -213,19 +213,73 @@ void reguser::genarateid(){
 }
 
 
+//admin signin
+void adm_signin(){
+    cout<<"Hello admins";
+}
 
+//Reg usere signin
+void reg_signin(){
+    cout<<"Hello Useres";
+}
+
+//loging menu
+void login(){
+    cout<<"Hello";
+}
+
+//signgin menu 
+void signin(){
+    int op1;
+    cout<<endl<<"\t\t\tSignin Menu"<<endl<<"1 : Library Admin\n2 : Library User"<<endl;
+
+    while(1)
+    {
+    try{    
+    cout<<" : ";
+    cin>>op1;
+    if ((op1 != 1)&&(op1 != 2)){
+        throw(op1);
+    }
+    else{break;}
+    }
+    catch(int e){
+        continue;}
+    }
+    if(op1==1)adm_signin();
+    else reg_signin();
+    
+}
+
+//Function for the Menu
+void menu(){
+    int op1;
+    cout<<"\t\t\t Library Management System"<<endl;
+    cout<<"1 : Login\n2 : Signin\n3 : Visit"<<endl;
+
+    while(1)
+    {
+    try{    
+    cout<<" : ";
+    cin>>op1;
+    if ((op1 != 1)&&(op1 != 2)&&(op1!=3)){
+        throw(op1);
+    }
+    else{break;}
+    }
+    catch(int e){
+        continue;}
+    }
+
+    if(op1==1)login();
+    else if(op1==2)signin();
+
+}
 
 
 //start of the main function
 
 int main(){
-    userC user("sulitha", "20030119", "chnabay");
-    admuser u;
-    u.createAcc();
-    u.printcard();
-    reguser ru;
-    ru.createacc();
-    ru.printcard();
-
+    menu();
     return 0;
 }
